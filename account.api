@@ -1,0 +1,58 @@
+syntax = "v1"
+
+type (
+	Result {
+		Code    int64  `json:"code"`
+		Message string `json:"message"`
+	}
+	User {
+		ID       int64  `json:"id"`
+		FullName string `json:"fullName"`
+		Email    string `json:"email"`
+	}
+)
+
+type (
+	LoginReq {
+		Email    string `form:"email"`
+		Password string `form:"password"`
+	}
+	LoginRes {
+		User   User   `json:"user"`
+		Result Result `json:"result"`
+	}
+)
+
+type (
+	RegisterReq {
+		Fullname string `form:"fullname"`
+		Password string `form:"password"`
+		Email    string `form:"email"`
+	}
+	RegisterRes {
+		User   User   `json:"user"`
+		Result Result `json:"result"`
+	}
+)
+
+type (
+	GetUserReq {
+		UserID int64 `path:"user_id"`
+	}
+	GetUserRes {
+		User   User   `json:"user"`
+		Result Result `json:"result"`
+	}
+)
+
+service account-api {
+	@handler LoginHandler
+	post /user/login (LoginReq) returns (LoginRes)
+
+	@handler RegisterHandler
+	post /user/register (RegisterReq) returns (RegisterRes)
+
+	@handler GetUserHandler
+	get /user/:user_id (GetUserReq) returns (GetUserRes)
+}
+

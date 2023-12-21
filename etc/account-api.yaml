@@ -1,0 +1,9 @@
+Name: account
+Host: 0.0.0.0
+Port: 8888
+Auth:
+  AccessSecret: ThoPhamSecretKey
+  AccessExpire: 25920000000000
+Database:
+  DataSource: tholgbg:abcdef@tcp(0.0.0.0:3306)/cnpm
+  DataName: mysql
